@@ -8,7 +8,23 @@
 
     <script>
         var WORDS     = ["booger", "apple", "hackbright", "mango", "greyhound", "ravenclaw"];
-        var SCRAMBLED = ["oogreb", "papel", "backrhight", "goman", "yonderhug", "cravelawn"];
+
+        //http://blog.boyet.com/blog/javascriptlessons/javascript-shuffling-by-sorting/
+
+        function shuffle (a) {
+            var wordArray = a.split("");
+            var n = wordArray.length;
+
+            for (var i = n - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var swap = wordArray[i];
+                wordArray[i] = wordArray[j];
+                wordArray[j] = swap;
+            }
+            return wordArray.join("");
+        }
+
+        // var SCRAMBLED = ["oogreb", "papel", "backrhight", "goman", "yonderhug", "cravelawn"];
 
         var playing = true;
 
@@ -18,11 +34,11 @@
             var index = Math.floor(Math.random() * WORDS.length);
             
             // console.log(index);
-            var word = WORDS[index]
-            ;
+            var word = WORDS[index];
             
             // Grab the corresponding scrambled word from the SCRAMBLED array
-            var scrWord = SCRAMBLED[index];
+            var scrWord = shuffle(word);
+            // var scrWord = SCRAMBLED[index];
             
             // console.log(word);
             console.log(scrWord);
@@ -32,7 +48,9 @@
             // i fail silently
             var guess = prompt("Please enter a guess:", "word here");
             console.log(guess);
-            
+            guess = guess.toLowerCase().trim();
+            console.log("trimmed and lower guess: " + guess);
+
             // If the user guesses wrong, tell them they were wrong and the right word.
             if (guess !== word) {
                 console.log("guess was wrong");
