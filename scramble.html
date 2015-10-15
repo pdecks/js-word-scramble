@@ -24,6 +24,8 @@
             return wordArray.join("");
         }
 
+
+
         // var SCRAMBLED = ["oogreb", "papel", "backrhight", "goman", "yonderhug", "cravelawn"];
 
         var playing = true;
@@ -52,16 +54,32 @@
             console.log("trimmed and lower guess: " + guess);
 
             // If the user guesses wrong, tell them they were wrong and the right word.
-            if (guess !== word) {
-                console.log("guess was wrong");
-                alert("Yo guess was wrong, foo. The right word is " + word);
+            // if (guess !== word) {
+            //     console.log("guess was wrong");
+            //     alert("Yo guess was wrong, foo. The right word is " + word);
+            // }
+            // Like, Really Really Hard Further Study Solution
+            while (guess !== word) {
+
+                try {
+                    if(guess === "") throw "empty.";
+                    if(isNaN(guess) === false) throw "a number, not a word."
+                    if(guess.length !== word.length ) throw "was not the right length."
+                    
+                } catch(err) {
+                    alert("Your guess was " + err);
+                }
+                var guess = prompt("Please enter a guess:", "word here");
+                console.log(guess);
+                guess = guess.toLowerCase().trim();
+                console.log("trimmed and lower guess: " + guess);
             }
 
+
             // If the user guesses the correct word, congratulate them.
-            else {
-                console.log("guess was right");
-                alert("Correct! Nice job!");
-            }
+            console.log("guess was right");
+            alert("Correct! Nice job!");
+            
 
             playing = confirm("Press OK To keep playing or Cancel to quit");
             console.log(playing);
